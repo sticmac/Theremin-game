@@ -4,7 +4,7 @@ function love.load()
 	p = io.Serial{port='/dev/ttyACM0', baud=3200, bits=8, stops=1, parity='n'};
 	y=300;
 
-	--[[Calibrage du thérémine (en cours)
+	--Calibrage du thérémine (en cours)
 	local i = 0;
 	calibre = 0;
 	while i < 5 do
@@ -16,7 +16,7 @@ function love.load()
 			end
 		end
 	end
-	calibre = (calibre / 5)-100;]]
+	calibre = (calibre / 5) - love.graphics.getHeight(); --Calibrage terminé.
 end
 
 function love.draw()
@@ -27,9 +27,9 @@ end
 function love.update(dt)
 	local var = tonumber(p:read());
 	if var ~= nil then
-		if var <= 500 and var >= 100 then
-			print(tostring(var));
-			y = var;
+		local yvar = var - calibre;
+		if yvar <= 500 and yvar >= 100 then
+			y = yvar;
 		end
 	end
 end	
