@@ -17,6 +17,8 @@ function love.load()
 		end
 	end
 	calibre = (calibre / 5) - love.graphics.getHeight(); --Calibrage terminé.
+
+	draw = true; --Possibility to draw enemies
 end
 
 function love.draw()
@@ -25,6 +27,10 @@ function love.draw()
 end
 
 function love.update(dt)
+	move();
+end
+
+function move()
 	local var = tonumber(p:read());
 	if var ~= nil then
 		local yvar = var - calibre;
@@ -32,4 +38,4 @@ function love.update(dt)
 			y = yvar;
 		end
 	end
-end	
+end
